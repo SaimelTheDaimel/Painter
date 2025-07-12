@@ -1,3 +1,3 @@
 extends Node
 
-signal player_moves(direction: int)
+signal player_moves(direction: int, delta: float)
