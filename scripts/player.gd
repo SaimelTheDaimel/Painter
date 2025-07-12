@@ -20,9 +20,11 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("run")
 		animated_sprite.flip_h = direction < 0
 		velocity.x = direction * SPEED
+		Signals.player_moves.emit(direction)
 	else:
 		animated_sprite.play("idle")
 		velocity.x = 0
+		Signals.player_moves.emit(direction)
 		
 	velocity += get_gravity() * delta
 	move_and_slide()
