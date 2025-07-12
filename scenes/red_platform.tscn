@@ -4,12 +4,12 @@
 
 [sub_resource type="Curve2D" id="Curve2D_d8brq"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 57, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69, 0)
 }
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq2e3"]
-size = Vector2(32, 8)
+size = Vector2(32, 9)
 
 [node name="Path2D" type="Path2D"]
 curve = SubResource("Curve2D_d8brq")
@@ -17,12 +17,12 @@ curve = SubResource("Curve2D_d8brq")
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false
 
-[node name="RigidBody2D" type="RigidBody2D" parent="PathFollow2D"]
+[node name="StaticBody2D" type="StaticBody2D" parent="PathFollow2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/RigidBody2D"]
-shape = SubResource("RectangleShape2D_vq2e3")
-
-[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D/RigidBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D/StaticBody2D"]
 texture = ExtResource("1_vq2e3")
 region_enabled = true
 region_rect = Rect2(32, 0, 32, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_vq2e3")
