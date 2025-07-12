@@ -197,8 +197,9 @@ region_rect = Rect2(32, 0, 32, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/StaticBody2D"]
 shape = SubResource("RectangleShape2D_ppgk2")
 
-[node name="killzone" parent="Path2D" instance=ExtResource("7_klq6b")]
+[node name="killzone" parent="." instance=ExtResource("7_klq6b")]
+position = Vector2(-1918, -188)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/killzone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
 position = Vector2(2063, 174)
 shape = SubResource("WorldBoundaryShape2D_b121j")

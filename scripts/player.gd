@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 100.0
-const JUMP_VELOCITY = -250.0
+const SPEED = 150.0
+const JUMP_VELOCITY = -400.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -27,7 +27,8 @@ func _physics_process(delta: float) -> void:
 		Signals.player_moves.emit(direction, delta)
 		
 	velocity += get_gravity() * delta
+	
 	move_and_slide()
 	
-
-	move_and_slide()
+func die():
+	pass
