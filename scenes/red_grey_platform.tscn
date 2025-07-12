@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://yu3ctedd0dmm"]
+
+[ext_resource type="Texture2D" uid="uid://kkkd0o4goi48" path="res://assets/Tiles.png" id="1_v7snv"]
+[ext_resource type="Script" uid="uid://dk5aikhdy8oc" path="res://scripts/red_grey_platform.gd" id="1_v7xlv"]
+
+[sub_resource type="Curve2D" id="Curve2D_v7xlv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pglis"]
+size = Vector2(32, 16)
+
+[node name="Path2D" type="Path2D" node_paths=PackedStringArray("ratio")]
+curve = SubResource("Curve2D_v7xlv")
+script = ExtResource("1_v7xlv")
+ratio = NodePath("PathFollow2D")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PathFollow2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_pglis")
+
+[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D/StaticBody2D"]
+texture = ExtResource("1_v7snv")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 16)

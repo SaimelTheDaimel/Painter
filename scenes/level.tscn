@@ -1,12 +1,12 @@
-[gd_scene load_steps=15 format=4 uid="uid://b3g0kd6jmcmfj"]
+[gd_scene load_steps=13 format=4 uid="uid://b3g0kd6jmcmfj"]
 
 [ext_resource type="PackedScene" uid="uid://diuc423fb3na1" path="res://scenes/player.tscn" id="1_2q6dc"]
 [ext_resource type="Script" uid="uid://drljerdy4m182" path="res://scripts/level.gd" id="1_2r41h"]
 [ext_resource type="Texture2D" uid="uid://kkkd0o4goi48" path="res://assets/Tiles.png" id="1_w7c3h"]
 [ext_resource type="Texture2D" uid="uid://cei23ytxwpygc" path="res://assets/BackgroundBlack.png" id="1_w8frs"]
 [ext_resource type="Script" uid="uid://bqvf6ux7sqod8" path="res://scripts/player.gd" id="4_mx8sn"]
-[ext_resource type="Script" uid="uid://c2bmo8duci0s8" path="res://scripts/path_2d.gd" id="6_klq6b"]
 [ext_resource type="PackedScene" uid="uid://dcqvav2flipe4" path="res://scenes/killzone.tscn" id="7_klq6b"]
+[ext_resource type="PackedScene" uid="uid://yu3ctedd0dmm" path="res://scenes/red_grey_platform.tscn" id="8_b121j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mx8sn"]
 texture = ExtResource("1_w8frs")
@@ -146,15 +146,6 @@ physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_w8frs")
 
-[sub_resource type="Curve2D" id="Curve2D_mx8sn"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 2079, 215, 0, 0, 0, 0, 2180, 215)
-}
-point_count = 2
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppgk2"]
-size = Vector2(32, 16)
-
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b121j"]
 distance = -126.0
 
@@ -176,30 +167,17 @@ script = ExtResource("4_mx8sn")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
 
-[node name="Path2D" type="Path2D" parent="."]
-position = Vector2(-1918, -188)
-curve = SubResource("Curve2D_mx8sn")
-script = ExtResource("6_klq6b")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(2079, 215)
-rotates = false
-loop = false
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Path2D/PathFollow2D"]
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/StaticBody2D"]
-texture = ExtResource("1_w7c3h")
-region_enabled = true
-region_rect = Rect2(32, 0, 32, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/StaticBody2D"]
-shape = SubResource("RectangleShape2D_ppgk2")
-
 [node name="killzone" parent="." instance=ExtResource("7_klq6b")]
 position = Vector2(-1918, -188)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
 position = Vector2(2063, 174)
 shape = SubResource("WorldBoundaryShape2D_b121j")
+
+[node name="red_grey_platforms" type="Node" parent="."]
+
+[node name="RGPlat1" parent="red_grey_platforms" instance=ExtResource("8_b121j")]
+position = Vector2(115, -34)
+
+[node name="RGPlat2" parent="red_grey_platforms" instance=ExtResource("8_b121j")]
+position = Vector2(248, -18)
