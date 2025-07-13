@@ -1,7 +1,7 @@
 extends Path2D
 
-@onready var path_follow: PathFollow2D = $PathFollow2D
-@export var ratio: PathFollow2D
+@onready var path_follow_2d: PathFollow2D = $PathFollow2D
 
-func move_block(dir, delta):
-	ratio.progress_ratio += delta * dir
+func move_block(dir, speed, delta):
+	path_follow_2d.progress += speed * dir * delta 
+	

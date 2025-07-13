@@ -99,7 +99,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -128,7 +128,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 10.0
+"speed": 8.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -143,5 +143,4 @@ position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_60mlk")
 animation = &"idle"
 autoplay = "idle"
-frame = 6
-frame_progress = 0.328269
+frame_progress = 0.838138
