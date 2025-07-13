@@ -5,6 +5,8 @@ const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
 const FALL_SPEED = 2500
 const JUMP_GRAVITY = 800
+const WALL_SLIDE_SPEED = 50
+
 var was_on_floor = 0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -13,16 +15,13 @@ var was_on_floor = 0
 
 func _physics_process(delta: float) -> void:
 	
-	# Apply gravity
-	if not is_on_floor():
-		if velocity.y > 0:
-			velocity.y += FALL_SPEED * delta
-		else:
-			velocity.y += JUMP_GRAVITY * delta
+	handle_gravity(delta)
 
 	var direction := Input.get_axis("move_left", "move_right")
 
 	handle_jump()
+	
+	wall_jump()
 	
 	animation_player(direction)
 	
@@ -39,6 +38,9 @@ func jump():
 	velocity.y = JUMP_VELOCITY
 	coyote_timer.stop()
 	buffer_time.stop()
+
+func wall_jump():
+	pass
 	
 func apply_movement(dir, speedy, delta):
 	if dir != 0:
@@ -67,3 +69,13 @@ func handle_jump():
 			
 	if !buffer_time.is_stopped() and (is_on_floor() or !coyote_timer.is_stopped()):
 		jump()
+		
+func handle_gravity(delta):
+	if !is_on_floor():
+		if velocity.y < 0:
+			velocity.y += JUMP_GRAVITY * delta
+		else:
+			if is_on_wall():
+				velocity.y = WALL_SLIDE_SPEED
+			else:
+				velocity.y += FALL_SPEED * delta
