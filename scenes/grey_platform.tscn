@@ -1,18 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://yu3ctedd0dmm"]
+[gd_scene load_steps=5 format=3 uid="uid://csqkxf4b02sfj"]
 
-[ext_resource type="Texture2D" uid="uid://kkkd0o4goi48" path="res://assets/Tiles.png" id="1_v7snv"]
-[ext_resource type="Script" uid="uid://dk5aikhdy8oc" path="res://scripts/red_grey_platform.gd" id="1_v7xlv"]
+[ext_resource type="Script" uid="uid://dk5aikhdy8oc" path="res://scripts/grey_platform.gd" id="1_my208"]
+[ext_resource type="Texture2D" uid="uid://kkkd0o4goi48" path="res://assets/Tiles.png" id="2_jb7tw"]
 
 [sub_resource type="Curve2D" id="Curve2D_v7xlv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pglis"]
-size = Vector2(32, 16)
+size = Vector2(16, 16)
 
 [node name="Path2D" type="Path2D"]
 curve = SubResource("Curve2D_v7xlv")
-script = ExtResource("1_v7xlv")
+script = ExtResource("1_my208")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(4, -1)
 rotates = false
 loop = false
 
@@ -22,6 +23,6 @@ loop = false
 shape = SubResource("RectangleShape2D_pglis")
 
 [node name="Sprite2D" type="Sprite2D" parent="PathFollow2D/StaticBody2D"]
-texture = ExtResource("1_v7snv")
+texture = ExtResource("2_jb7tw")
 region_enabled = true
-region_rect = Rect2(32, 0, 32, 16)
+region_rect = Rect2(48, 0, 16, 16)

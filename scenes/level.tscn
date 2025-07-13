@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://kkkd0o4goi48" path="res://assets/Tiles.png" id="1_w7c3h"]
 [ext_resource type="Texture2D" uid="uid://cei23ytxwpygc" path="res://assets/BackgroundBlack.png" id="1_w8frs"]
 [ext_resource type="Script" uid="uid://bqvf6ux7sqod8" path="res://scripts/player.gd" id="4_mx8sn"]
+[ext_resource type="PackedScene" uid="uid://csqkxf4b02sfj" path="res://scenes/grey_platform.tscn" id="7_b121j"]
 [ext_resource type="PackedScene" uid="uid://dcqvav2flipe4" path="res://scenes/killzone.tscn" id="7_klq6b"]
-[ext_resource type="PackedScene" uid="uid://yu3ctedd0dmm" path="res://scenes/red_grey_platform.tscn" id="8_b121j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mx8sn"]
 texture = ExtResource("1_w8frs")
@@ -151,13 +151,13 @@ distance = -126.0
 
 [sub_resource type="Curve2D" id="Curve2D_klq6b"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -88, 15, 0, 0, 0, 0, 40, 15)
+"points": PackedVector2Array(0, 0, 0, 0, 12, -9, 0, 0, 0, 0, 135, -9)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_b121j"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 11, 24, 0, 0, 0, 0, 59, 24)
+"points": PackedVector2Array(0, 0, 0, 0, 4, -1, 0, 0, 0, 0, 178, -1)
 }
 point_count = 2
 
@@ -171,11 +171,11 @@ tile_set = SubResource("TileSet_ppgk2")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Tiles"]
 position = Vector2(60, 25)
-tile_map_data = PackedByteArray("AAD7/wEAAAAEAAMAAAD8/wEAAAAEAAMAAAD9/wEAAAAEAAMAAAD+/wEAAAAEAAMAAAD//wEAAAAEAAMAAAAAAAEAAAAEAAMAAAABAAEAAAAEAAMAAAACAAEAAAAEAAMAAAADAAEAAAAEAAMAAAAEAAEAAAAEAAMAAAAFAAEAAAAEAAMAAAAGAAEAAAAEAAMAAAAHAAEAAAAEAAMAAAD6/wEAAAADAAMAAAD6/wAAAAADAAIAAAD6////AAADAAIAAAD6//7/AAADAAIAAAD6//3/AAADAAIAAAD6//z/AAADAAIAAAD6//v/AAADAAIAAAD6//r/AAADAAIAAAD6//n/AAADAAIAAAASAPj/AAAFAAEAAAASAPn/AAAFAAIAAAASAPr/AAAFAAIAAAASAPv/AAAFAAIAAAASAPz/AAAFAAIAAAASAP3/AAAFAAIAAAASAP7/AAAFAAIAAAASAP//AAAFAAIAAAASAAAAAAAFAAIAAAASAAEAAAAFAAMAAAANAAEAAAAEAAMAAAAOAAEAAAAEAAMAAAAPAAEAAAAEAAMAAAAQAAEAAAAEAAMAAAARAAEAAAAEAAMAAAD///7/AAABAAAAAAAKAP7/AAABAAAAAAASAPX/AAAFAAEAAAARAPX/AAAEAAEAAAAQAPX/AAAEAAEAAAAPAPX/AAAEAAEAAAAOAPX/AAAEAAEAAAANAPX/AAAEAAEAAAAMAPX/AAAEAAEAAAALAPX/AAAEAAEAAAAKAPX/AAAEAAEAAAAJAPX/AAAEAAEAAAAIAPX/AAAEAAEAAAAHAPX/AAAEAAEAAAAGAPX/AAAEAAEAAAAFAPX/AAAEAAEAAAAEAPX/AAAEAAEAAAADAPX/AAAEAAEAAAD7//X/AAAEAAEAAAD6//X/AAADAAEAAAD8//X/AAAEAAEAAAD9//X/AAAEAAEAAAD+//X/AAAEAAEAAAD///X/AAAEAAEAAAAAAPX/AAAEAAEAAAABAPX/AAAEAAEAAAACAPX/AAAEAAEAAAD6//b/AAADAAIAAAD6//f/AAADAAIAAAD6//j/AAADAAIAAAASAPb/AAAFAAIAAAASAPf/AAAFAAIAAAA=")
+tile_map_data = PackedByteArray("AAD+/wEAAAABAAIAAAD6/wAAAAABAAIAAAD6////AAABAAIAAAD6/wEAAAABAAIAAAD7/wEAAAABAAIAAAD8/wEAAAABAAIAAAD9/wEAAAABAAIAAAD//wEAAAABAAIAAAAAAAEAAAABAAIAAAAAAPz/AAABAAIAAAAAAP3/AAABAAIAAAAAAP7/AAABAAIAAAAAAP//AAABAAIAAAAAAAAAAAABAAIAAAD6//7/AAABAAIAAAABAPz/AAABAAIAAAACAPz/AAABAAIAAAADAPz/AAABAAIAAAAEAPz/AAABAAIAAAD8//v/AAABAAIAAAD8//r/AAABAAIAAAD8//n/AAABAAIAAAD8//3/AAABAAIAAAD8//z/AAABAAIAAAD7//7/AAABAAIAAAD8//7/AAABAAIAAAD8//j/AAABAAIAAAD+//j/AAABAAIAAAD///j/AAABAAIAAAD9//j/AAABAAIAAAAAAPj/AAABAAIAAAABAPj/AAABAAIAAAD9//7/AAABAAIAAAA=")
 tile_set = SubResource("TileSet_mx8sn")
 
 [node name="Player" parent="." instance=ExtResource("1_2q6dc")]
-position = Vector2(61, 41)
+position = Vector2(-5, 41)
 script = ExtResource("4_mx8sn")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -185,6 +185,14 @@ limit_right = 364
 limit_bottom = 57
 position_smoothing_enabled = true
 
+[node name="Coyote_timer" type="Timer" parent="Player"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Buffer_time" type="Timer" parent="Player"]
+wait_time = 0.1
+one_shot = true
+
 [node name="killzone" parent="." instance=ExtResource("7_klq6b")]
 position = Vector2(-1918, -188)
 
@@ -192,12 +200,12 @@ position = Vector2(-1918, -188)
 position = Vector2(2063, 174)
 shape = SubResource("WorldBoundaryShape2D_b121j")
 
-[node name="red_grey_platforms" type="Node" parent="."]
+[node name="grey_platforms" type="Node" parent="."]
 
-[node name="RGPlat1" parent="red_grey_platforms" instance=ExtResource("8_b121j")]
-position = Vector2(164, -14)
+[node name="GPlat1" parent="grey_platforms" instance=ExtResource("7_b121j")]
+position = Vector2(142, 29)
 curve = SubResource("Curve2D_klq6b")
 
-[node name="RGPlat2" parent="red_grey_platforms" instance=ExtResource("8_b121j")]
-position = Vector2(193, 25)
+[node name="GPlat2" parent="grey_platforms" instance=ExtResource("7_b121j")]
+position = Vector2(149, 41)
 curve = SubResource("Curve2D_b121j")
