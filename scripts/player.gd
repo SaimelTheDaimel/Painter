@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -300.0
 const FALL_SPEED = 2500
 const JUMP_GRAVITY = 800
 const WALL_SLIDE_SPEED = 50
+const WALL_JUMP_PUSHBACK = 1000
 
 var was_on_floor = 0
 
@@ -15,20 +16,13 @@ var was_on_floor = 0
 
 func _physics_process(delta: float) -> void:
 	
-	handle_gravity(delta)
-
 	var direction := Input.get_axis("move_left", "move_right")
-
+	handle_gravity(delta, direction)
 	handle_jump()
-	
-	wall_jump()
-	
+	handle_wall_jump(direction)
 	animation_player(direction)
-	
 	apply_movement(direction, SPEED, delta)
-	
 	was_on_floor = is_on_floor()
-	
 	move_and_slide()
 	
 func die():
@@ -38,9 +32,6 @@ func jump():
 	velocity.y = JUMP_VELOCITY
 	coyote_timer.stop()
 	buffer_time.stop()
-
-func wall_jump():
-	pass
 	
 func apply_movement(dir, speedy, delta):
 	if dir != 0:
@@ -70,12 +61,30 @@ func handle_jump():
 	if !buffer_time.is_stopped() and (is_on_floor() or !coyote_timer.is_stopped()):
 		jump()
 		
-func handle_gravity(delta):
+func handle_wall_jump(dir):
+	if Input.is_action_just_pressed("jump"):
+		if is_on_wall():
+			walljump()
+		else:
+			buffer_time.start()
+			
+	if !buffer_time.is_stopped() and is_on_wall():
+		walljump()
+	
+func walljump():
+	if Input.is_action_pressed("move_right"):
+		velocity.x = - WALL_JUMP_PUSHBACK
+	if Input.is_action_pressed("move_left"):
+		velocity.x = WALL_JUMP_PUSHBACK
+	velocity.y = JUMP_VELOCITY
+	buffer_time.stop()
+	
+func handle_gravity(delta, dir):
 	if !is_on_floor():
 		if velocity.y < 0:
 			velocity.y += JUMP_GRAVITY * delta
 		else:
-			if is_on_wall():
+			if is_on_wall() and dir != 0:
 				velocity.y = WALL_SLIDE_SPEED
 			else:
 				velocity.y += FALL_SPEED * delta
